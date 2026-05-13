@@ -1,0 +1,115 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noodle Ordering System</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script type="module" src="app.js" defer></script>
+</head>
+<body>
+
+<!-- CUSTOMER PAGE -->
+<div class="container" id="customerPage">
+
+  <h1>🍜 Place Your Order</h1>
+
+  <form id="orderForm">
+
+    <label>Food</label>
+
+    <select id="food">
+      <option value="Indomie">Indomie</option>
+      <option value="Spaghetti">Spaghetti</option>
+    </select>
+
+    <label>Pepper Level</label>
+
+    <select id="pepper">
+      <option value="Mild">Mild</option>
+      <option value="Medium">Medium</option>
+      <option value="Extra Hot">Extra Hot</option>
+    </select>
+
+    <label>Toppings</label>
+
+    <div class="checkbox-group">
+
+      <label>
+        <input type="checkbox" class="topping" value="Ketchup">
+        Ketchup
+      </label>
+
+      <label>
+        <input type="checkbox" class="topping" value="Corned Beef">
+        Corned Beef
+      </label>
+
+      <label>
+        <input type="checkbox" class="topping" value="Baked Beans">
+        Baked Beans
+      </label>
+
+      <label>
+        <input type="checkbox" class="topping" value="Vegetables">
+        Vegetables
+      </label>
+
+    </div>
+
+    <label>Quantity</label>
+
+    <input type="number" id="quantity" value="1" min="1">
+
+    <button type="submit">
+      Place Order
+    </button>
+
+  </form>
+
+  <div id="status"></div>
+
+</div>
+
+<!-- ADMIN LOGIN -->
+<div class="container hidden" id="loginPage">
+
+  <h1>🔐 Admin Login</h1>
+
+  <form id="loginForm">
+
+    <input
+      type="password"
+      id="password"
+      placeholder="Enter Admin Password"
+      required
+    >
+
+    <button type="submit">
+      Login
+    </button>
+
+  </form>
+
+  <div id="loginMessage"></div>
+
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="container hidden" id="adminPage">
+
+  <h1>🍳 Kitchen Dashboard</h1>
+
+  <button id="logoutBtn">
+    Logout
+  </button>
+
+  <div id="orders"></div>
+
+</div>
+
+</body>
+</html>
