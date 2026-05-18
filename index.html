@@ -1,76 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Noodle Ordering System</title>
 
-  <link rel="stylesheet" href="style.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-  <script type="module" src="app.js" defer></script>
+  <title>
+    Noodle Ordering System
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <script
+    type="module"
+    src="app.js"
+    defer
+  ></script>
+
 </head>
+
 <body>
 
 <!-- CUSTOMER PAGE -->
-<div class="container" id="customerPage">
 
-  <h1>🍜 Place Your Order</h1>
+<div
+  class="container"
+  id="customerPage"
+>
+
+  <h1>
+    🍜 Place Your Order
+  </h1>
 
   <form id="orderForm">
 
-    <label>Food</label>
+    <!-- FOOD -->
+
+    <label>
+      Food
+    </label>
 
     <select id="food">
-      <option value="Indomie">Indomie</option>
-      <option value="Spaghetti">Spaghetti</option>
+
+      <option value="Indomie">
+        Indomie - ₵20 Minimum
+      </option>
+
+      <option value="Spaghetti">
+        Spaghetti - ₵10 Minimum
+      </option>
+
     </select>
 
-    <label>Pepper Level</label>
+    <!-- PEPPER -->
+
+    <label>
+      Pepper Level
+    </label>
 
     <select id="pepper">
-      <option value="Mild">Mild</option>
-      <option value="Medium">Medium</option>
-      <option value="Extra Hot">Extra Hot</option>
+
+      <option value="Mild">
+        Mild
+      </option>
+
+      <option value="Medium">
+        Medium
+      </option>
+
+      <option value="Extra Hot">
+        Extra Hot
+      </option>
+
     </select>
 
-    <label>Toppings</label>
+    <!-- TOPPINGS -->
+
+    <label>
+      Toppings
+    </label>
 
     <div class="checkbox-group">
 
       <label>
-        <input type="checkbox" class="topping" value="Ketchup">
+        <input
+          type="checkbox"
+          class="topping"
+          value="Ketchup"
+        >
+
         Ketchup
       </label>
 
       <label>
-        <input type="checkbox" class="topping" value="Corned Beef">
+        <input
+          type="checkbox"
+          class="topping"
+          value="Corned Beef"
+        >
+
         Corned Beef
       </label>
 
       <label>
-        <input type="checkbox" class="topping" value="Baked Beans">
+        <input
+          type="checkbox"
+          class="topping"
+          value="Baked Beans"
+        >
+
         Baked Beans
       </label>
 
       <label>
-        <input type="checkbox" class="topping" value="Vegetables">
+        <input
+          type="checkbox"
+          class="topping"
+          value="Vegetables"
+        >
+
         Vegetables
       </label>
 
     </div>
 
-    <label>Quantity</label>
+    <!-- PACKAGING -->
 
-    <input type="number" id="quantity" value="1" min="1">
+    <label>
+      Packaging
+    </label>
+
+    <select id="packaging">
+
+      <option value="Rubber">
+        Rubber
+      </option>
+
+      <option value="Packed">
+        Packed
+      </option>
+
+    </select>
+
+    <!-- QUANTITY -->
+
+    <label>
+      Quantity
+    </label>
+
+    <input
+      type="number"
+      id="quantity"
+      value="1"
+      min="1"
+    >
+
+    <!-- CUSTOM PRICE -->
+
+    <label>
+      Custom Price (₵)
+    </label>
+
+    <input
+      type="number"
+      id="customPrice"
+      placeholder="Enter amount"
+    >
+
+    <!-- TOTAL -->
 
     <div class="price-box">
+
       <h3>
-        Total Price: ₵<span id="totalPrice">20</span>
+
+        Total Price:
+        ₵<span id="totalPrice">
+          20
+        </span>
+
       </h3>
+
     </div>
 
+    <p id="priceMessage"></p>
+
+    <!-- BUTTON -->
+
     <button type="submit">
+
       Place Order
+
     </button>
 
   </form>
@@ -80,9 +206,15 @@
 </div>
 
 <!-- ADMIN LOGIN -->
-<div class="container hidden" id="loginPage">
 
-  <h1>🔐 Admin Login</h1>
+<div
+  class="container hidden"
+  id="loginPage"
+>
+
+  <h1>
+    🔐 Admin Login
+  </h1>
 
   <form id="loginForm">
 
@@ -103,10 +235,16 @@
 
 </div>
 
-<!-- ADMIN DASHBOARD -->
-<div class="container hidden" id="adminPage">
+<!-- ADMIN PAGE -->
 
-  <h1>🍳 Kitchen Dashboard</h1>
+<div
+  class="container hidden"
+  id="adminPage"
+>
+
+  <h1>
+    🍳 Kitchen Dashboard
+  </h1>
 
   <button id="logoutBtn">
     Logout
@@ -118,3 +256,4 @@
 
 </body>
 </html>
+   
