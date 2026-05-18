@@ -15,37 +15,55 @@ const supabase = createClient(
 /* PAGES */
 
 const customerPage =
-document.getElementById('customerPage');
+document.getElementById(
+  'customerPage'
+);
 
 const loginPage =
-document.getElementById('loginPage');
+document.getElementById(
+  'loginPage'
+);
 
 const adminPage =
-document.getElementById('adminPage');
+document.getElementById(
+  'adminPage'
+);
 
 /* CUSTOMER */
 
 const form =
-document.getElementById('orderForm');
+document.getElementById(
+  'orderForm'
+);
 
 const statusDiv =
-document.getElementById('status');
+document.getElementById(
+  'status'
+);
 
 /* LOGIN */
 
 const loginForm =
-document.getElementById('loginForm');
+document.getElementById(
+  'loginForm'
+);
 
 const loginMessage =
-document.getElementById('loginMessage');
+document.getElementById(
+  'loginMessage'
+);
 
 /* ADMIN */
 
 const ordersDiv =
-document.getElementById('orders');
+document.getElementById(
+  'orders'
+);
 
 const logoutBtn =
-document.getElementById('logoutBtn');
+document.getElementById(
+  'logoutBtn'
+);
 
 const ADMIN_PASSWORD =
 'noodleadmin123';
@@ -53,28 +71,101 @@ const ADMIN_PASSWORD =
 /* PRICING */
 
 const quantityInput =
-document.getElementById('quantity');
+document.getElementById(
+  'quantity'
+);
+
+const customPriceInput =
+document.getElementById(
+  'customPrice'
+);
 
 const totalPrice =
-document.getElementById('totalPrice');
+document.getElementById(
+  'totalPrice'
+);
 
-const BASE_PRICE = 20;
+const priceMessage =
+document.getElementById(
+  'priceMessage'
+);
+
+function getMinimumPrice() {
+
+  const food =
+  document.getElementById(
+    'food'
+  ).value;
+
+  if (
+    food === 'Indomie'
+  ) {
+
+    return 20;
+  }
+
+  return 10;
+}
 
 function calculatePrice() {
 
   const quantity =
-  parseInt(quantityInput.value);
+  parseInt(
+    quantityInput.value
+  ) || 1;
 
-  let price =
-  BASE_PRICE * quantity;
+  const customPrice =
+  parseInt(
+    customPriceInput.value
+  ) || 0;
 
-  document.getElementById(
-    'totalPrice'
-  ).innerText = price;
+  const minimumPrice =
+  getMinimumPrice();
+
+  let finalPrice =
+  customPrice;
+
+  if (
+    customPrice < minimumPrice
+  ) {
+
+    finalPrice =
+    minimumPrice;
+  }
+
+  const total =
+  finalPrice * quantity;
+
+  totalPrice.innerText =
+  total;
+
+  priceMessage.innerHTML = `
+
+    Minimum price for
+
+    ${document.getElementById(
+      'food'
+    ).value}
+
+    is ₵${minimumPrice}
+
+  `;
 }
 
 quantityInput?.addEventListener(
   'input',
+  calculatePrice
+);
+
+customPriceInput?.addEventListener(
+  'input',
+  calculatePrice
+);
+
+document.getElementById(
+  'food'
+).addEventListener(
+  'change',
   calculatePrice
 );
 
@@ -90,7 +181,9 @@ new URLSearchParams(
 const mode =
 params.get('page');
 
-if (mode === 'admin') {
+if (
+  mode === 'admin'
+) {
 
   customerPage.classList.add(
     'hidden'
@@ -111,6 +204,7 @@ if (mode === 'admin') {
 
 loginForm?.addEventListener(
   'submit',
+
   (e) => {
 
     e.preventDefault();
@@ -121,7 +215,8 @@ loginForm?.addEventListener(
     ).value;
 
     if (
-      password === ADMIN_PASSWORD
+      password ===
+      ADMIN_PASSWORD
     ) {
 
       localStorage.setItem(
@@ -153,10 +248,13 @@ loginForm?.addEventListener(
 /* AUTO LOGIN */
 
 if (
+
   mode === 'admin' &&
+
   localStorage.getItem(
     'adminAuthenticated'
   ) === 'true'
+
 ) {
 
   loginPage.classList.add(
@@ -174,6 +272,7 @@ if (
 
 logoutBtn?.addEventListener(
   'click',
+
   () => {
 
     localStorage.removeItem(
@@ -197,6 +296,7 @@ function generateQueue() {
 
 form?.addEventListener(
   'submit',
+
   async (e) => {
 
     e.preventDefault();
@@ -204,6 +304,7 @@ form?.addEventListener(
     const toppings = [];
 
     document
+
       .querySelectorAll(
         '.topping:checked'
       )
@@ -216,16 +317,37 @@ form?.addEventListener(
       });
 
     const quantity =
-    document.getElementById(
-      'quantity'
-    ).value;
+    parseInt(
+      quantityInput.value
+    ) || 1;
+
+    const customPrice =
+    parseInt(
+      customPriceInput.value
+    ) || 0;
+
+    const minimumPrice =
+    getMinimumPrice();
+
+    let finalPrice =
+    customPrice;
+
+    if (
+      customPrice <
+      minimumPrice
+    ) {
+
+      finalPrice =
+      minimumPrice;
+    }
 
     const total =
-    BASE_PRICE * quantity;
+    finalPrice * quantity;
 
     const order = {
 
-      queue: generateQueue(),
+      queue:
+      generateQueue(),
 
       food:
       document.getElementById(
@@ -237,18 +359,28 @@ form?.addEventListener(
         'pepper'
       ).value,
 
+      packaging:
+      document.getElementById(
+        'packaging'
+      ).value,
+
       toppings:
       toppings.join(', '),
 
-      quantity: quantity,
+      quantity:
+      quantity,
 
-      total: total,
+      total:
+      total,
 
-      status: 'Waiting'
+      status:
+      'Waiting'
     };
 
-    const { data, error } =
-    await supabase
+    const {
+      data,
+      error
+    } = await supabase
 
       .from('orders')
 
@@ -293,20 +425,28 @@ function showCustomerStatus(
 
   statusDiv.innerHTML = `
 
-    <h2>${order.queue}</h2>
+    <h2>
+      ${order.queue}
+    </h2>
 
     <p>
+
       Status:
+
       <strong>
         ${order.status}
       </strong>
+
     </p>
 
     <p>
+
       Total:
+
       <strong>
         ₵${order.total}
       </strong>
+
     </p>
   `;
 }
@@ -333,30 +473,38 @@ async function getOrder(id) {
 
 function watchOrder(id) {
 
-  setInterval(async () => {
+  setInterval(
 
-    const order =
-    await getOrder(id);
+    async () => {
 
-    if (!order) {
+      const order =
+      await getOrder(id);
 
-      statusDiv.innerHTML = `
-        <h2>Completed</h2>
+      if (!order) {
 
-        <p>
-          Your food is ready
-          for pickup.
-        </p>
-      `;
+        statusDiv.innerHTML = `
 
-      return;
-    }
+          <h2>
+            Completed
+          </h2>
 
-    showCustomerStatus(
-      order
-    );
+          <p>
+            Your food is ready
+            for pickup.
+          </p>
+        `;
 
-  }, 3000);
+        return;
+      }
+
+      showCustomerStatus(
+        order
+      );
+
+    },
+
+    3000
+  );
 }
 
 /* EXISTING ORDER */
@@ -366,7 +514,9 @@ localStorage.getItem(
   'orderId'
 );
 
-if (existingOrderId) {
+if (
+  existingOrderId
+) {
 
   watchOrder(
     existingOrderId
@@ -385,6 +535,7 @@ async function loadOrders() {
     .select('*')
 
     .order('id', {
+
       ascending: false
     });
 
@@ -401,62 +552,100 @@ async function loadOrders() {
         </h2>
 
         <p>
-          <strong>Food:</strong>
+          <strong>
+            Food:
+          </strong>
+
           ${order.food}
         </p>
 
         <p>
-          <strong>Pepper:</strong>
+          <strong>
+            Pepper:
+          </strong>
+
           ${order.pepper}
         </p>
 
         <p>
-          <strong>Toppings:</strong>
+          <strong>
+            Packaging:
+          </strong>
+
+          ${order.packaging}
+        </p>
+
+        <p>
+          <strong>
+            Toppings:
+          </strong>
+
           ${order.toppings}
         </p>
 
         <p>
-          <strong>Quantity:</strong>
+          <strong>
+            Quantity:
+          </strong>
+
           ${order.quantity}
         </p>
 
         <p>
-          <strong>Total:</strong>
+          <strong>
+            Total:
+          </strong>
+
           ₵${order.total}
         </p>
 
         <p>
-          <strong>Status:</strong>
+          <strong>
+            Status:
+          </strong>
+
           ${order.status}
         </p>
 
         <button
+
           onclick="
           updateStatus(
             ${order.id},
             'Cooking'
           )"
+
         >
+
           Cooking
+
         </button>
 
         <button
+
           onclick="
           updateStatus(
             ${order.id},
             'Ready'
           )"
+
         >
+
           Ready
+
         </button>
 
         <button
+
           onclick="
           completeOrder(
             ${order.id}
           )"
+
         >
+
           Completed
+
         </button>
 
       </div>
@@ -467,13 +656,17 @@ async function loadOrders() {
 /* UPDATE STATUS */
 
 window.updateStatus =
-async function(id, status) {
+async function(
+  id,
+  status
+) {
 
   await supabase
 
     .from('orders')
 
     .update({
+
       status
     })
 
@@ -507,6 +700,7 @@ supabase
   )
 
   .on(
+
     'postgres_changes',
 
     {
