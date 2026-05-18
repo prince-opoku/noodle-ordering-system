@@ -1,83 +1,135 @@
+
 body {
+
   margin: 0;
   padding: 0;
+
   background: #111;
+
   color: white;
+
   font-family: Arial, sans-serif;
 }
 
 .container {
+
   max-width: 500px;
+
   margin: auto;
+
   padding: 20px;
 }
 
 .hidden {
+
   display: none;
 }
 
 h1 {
+
   text-align: center;
+
   color: orange;
 }
 
 form {
+
   background: #1f1f1f;
+
   padding: 20px;
+
   border-radius: 10px;
+
   display: flex;
+
   flex-direction: column;
+
   gap: 15px;
 }
 
 select,
 input,
 button {
+
   padding: 12px;
+
   border: none;
+
   border-radius: 5px;
 }
 
 button {
+
   background: orange;
+
   color: black;
+
   font-weight: bold;
+
   cursor: pointer;
 }
 
 button:hover {
+
   background: #ffb84d;
 }
 
 .checkbox-group {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 10px;
 }
 
 #status {
+
   background: #1f1f1f;
+
   padding: 15px;
+
   border-radius: 10px;
+
   margin-top: 20px;
 }
 
 .order-card {
+
   background: #1f1f1f;
+
   padding: 15px;
+
   border-radius: 10px;
+
   margin-bottom: 15px;
 }
 
 .price-box {
+
   background: #222;
+
   padding: 10px;
+
   border-radius: 8px;
+
   text-align: center;
+
   border: 1px solid orange;
 }
 
 .price-box h3 {
+
   margin: 0;
+
   color: orange;
+}
+
+#priceMessage {
+
+  color: orange;
+
+  text-align: center;
+
+  font-size: 14px;
 }
